@@ -1,0 +1,35 @@
+CONFIG_FOLDER: configs # Config files path
+FOLDER: experiments # Experiment files saving path
+
+TEST:
+  FOLDER: results # Testing files saving path
+
+DATASET:
+  TASK_ROOT: /mnt/data8tb/Documents/models/repo/MotionGPT3/prepare/instructions
+  SMPL_PATH: /mnt/data8tb/Documents/project/capstone-motion/HumanML3D/human_body_prior/body_model/smplh
+  TRANSFORM_PATH: /mnt/data8tb/Documents/models/repo/MotionGPT3/motGPT/data/transforms/
+  WORD_VERTILIZER_PATH: /mnt/data8tb/Documents/project/capstone-motion/text-to-motion/glove/
+  KIT:
+    ROOT: datasets/kit-ml # KIT directory
+    SPLIT_ROOT: datasets/kit-ml # KIT splits directory
+    MEAN_STD_PATH: /mnt/data8tb/Documents/project/capstone-motion/text-to-motion/checkpoints/
+  HUMANML3D:
+    ROOT: /mnt/data8tb/Documents/project/capstone-motion/HumanML3D/HumanML3D  # HumanML3D directory
+    SPLIT_ROOT: /mnt/data8tb/Documents/project/capstone-motion/HumanML3D/HumanML3D  # HumanML3D splits directory
+    MEAN_STD_PATH: /mnt/data8tb/Documents/project/capstone-motion/text-to-motion/checkpoints/
+
+METRIC:
+  TM2T:
+    t2m_path: /mnt/data8tb/Documents/project/capstone-motion/text-to-motion/checkpoints/t2m/ # path for tm2t evaluator
+  TMR:
+    tmr_path: deps/tmr/tmr_humanml3d_guoh3dfeats/
+
+model:
+  whisper_path: deps/whisper-large-v2 # path for whisper model, webui only
+  # whisper_path: openai/whisper-large-v2
+
+RENDER:
+  BLENDER_PATH: libs/blender-2.93.2-linux-x64/blender
+  SMPL_MODEL_PATH: /mnt/data8tb/Documents/project/capstone-motion/HumanML3D/human_body_prior/body_model/smplh
+  MODEL_PATH: /mnt/data8tb/Documents/project/capstone-motion/HumanML3D/human_body_prior/body_model/
+  FACES_PATH: deps/smplh/smplh.faces

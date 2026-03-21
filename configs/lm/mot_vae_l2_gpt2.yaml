@@ -1,0 +1,22 @@
+target: motGPT.archs.motgpt_l2lm.MLM
+params:
+  model_type: gpt2
+  model_path: deps/mot-gpt2
+  stage: ${TRAIN.STAGE}
+  motion_codebook_size: ${model.params.codebook_size}
+  mot_factor:  ${lm_ablation.mot_factor}
+  attention_mode:  ${lm_ablation.attention_mode}
+  ablation: ${ABLATION}
+
+  # diffhead: ${model.diff_loss}
+  # diffusion_batch_mul:  ${lm_ablation.diffusion_batch_mul}
+  # guidance_uncondp: ${lm_ablation.guidance_uncondp}
+  # predict_epsilon: ${lm_ablation.predict_epsilon}
+  # guidance_scale: ${lm_ablation.guidance_scale}
+  # fake_latent_mode: ${lm_ablation.fake_latent_mode}
+  motion_holder_repeat: ${lm_ablation.motion_holder_repeat}
+  holder_num_in_input: ${lm_ablation.holder_num_in_input}
+  motion_holder_seq_mode: ${lm_ablation.motion_holder_seq_mode}
+  with_hid_norm: ${lm_ablation.with_hid_norm}
+  with_vae_latent_norm: ${lm_ablation.with_vae_latent_norm}
+  interleaved_input: ${lm_ablation.interleaved_input}

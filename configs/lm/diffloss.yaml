@@ -1,0 +1,14 @@
+
+target: motGPT.diffusion.diffloss.DiffLoss
+params:
+  # target_size: model.motion_vae.latent_dim[0]
+  # target_channels: model.motion_vae.latent_dim[-1]
+  # z_channels: llm_decoder_embed_dim
+  width: 1024
+  depth: 3
+  multi_hidden: ${lm_ablation.multi_hidden}
+  num_sampling_steps: '${lm_ablation.diffusion_sampling_steps}'
+  noise_schedule: 'scaled_linear'
+  learn_sigma: False
+  sigma_small: True  
+  grad_checkpointing: False

@@ -1,0 +1,7 @@
+**__pycache__**
+benchmark_results/
+checkpoints/
+deps/
+experiments/
+mgpt3/
+results/

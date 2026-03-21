@@ -1,0 +1,118 @@
+NAME: stage2_all_diffusion # Experiment names
+ACCELERATOR: 'gpu' # Devices optioncal: “cpu”, “gpu”, “tpu”, “ipu”, “hpu”, “mps, “auto”
+NUM_NODES: 1 # Number of GPU nodes for distributed training
+DEVICE: [0] # Index of gpus eg. [0] or [0,1,2,3]
+
+lm_ablation:
+  # lm
+  motion_holder_repeat: 4
+  holder_num_in_input: 4
+  motion_holder_seq_mode: 'withse' # 'alone', 'withse'
+  with_hid_norm: False
+  with_vae_latent_norm: True
+  # diffloss
+
+  # ========================================================================
+  use_flow: False  # True = FlowLoss, False = DiffLoss
+  use_rk4_sampling: False  # True = RK4 (more accurate), False = Euler
+  sampling_steps: 25  # RK4 with 25 steps = 100 network calls (same as Euler 100)
+  # ========================================================================
+
+  multi_hidden: True
+  guidance_scale: 1.0
+  model_guidance_scale: 1.0
+  diffusion_batch_mul: 4
+  guidance_uncondp: 0.1
+  predict_epsilon: True
+  fake_latent_mode: 'learnable_zero'  # 'all_zero', 'learnable_rand', 'learnable_zero'
+  # mot arch
+  mot_factor: 1.0
+  attention_mode: 'all'
+  
+ABLATION:
+  SKIP_CONNECT: True
+  PE_TYPE: mld
+  DIFF_PE_TYPE: mld
+  
+TRAIN:
+  #---------------------------------
+  STAGE: lm_pretrain # stage "lm_t2m" , "lm_pretrain", "lm_instruct", "lm_finetune"
+  instruction_type: all # all, t2m, m2t
+  #---------------------------------
+  NUM_WORKERS: 8 # Number of workers
+  BATCH_SIZE: 45 # Size of batches
+  # accumulate_grad_batches: 2
+  END_EPOCH: 200 # End epoch
+  # RESUME: '/mnt/data8tb/Documents/models/repo/MotionGPT3/experiments/motgpt_2optimizer/MoT_vae_stage1_t2m' # Resume training from this path
+  PRETRAINED: '/mnt/data8tb/Documents/models/repo/MotionGPT3/experiments/motgpt_2optimizer/Stage-1-diffusion-main-for-use/checkpoints/diffusion-min-FID-epoch=epoch=142.ckpt' # Preatrained model path
+  # PRETRAINED_VAE: checkpoints/MotionGPT-base/motiongpt_s3_h3d.tar # Vae model path
+  PRETRAINED_VAE: checkpoints/1222_mld_humanml3d_FID041.ckpt # Vae model path
+
+  LR_SCHEDULER:
+    target: CosineAnnealingLR
+    params:
+      T_max: 1000
+      eta_min: 1e-6
+
+  OPTIM:
+    target: AdamW
+    params:
+      lr: 1e-4
+      betas: [0.9, 0.99]
+      weight_decay: 0.0
+    params_diff:
+      lr: 1e-4
+      betas: [0.9, 0.99]
+      weight_decay: 0.0
+
+# Evaluating Configuration
+EVAL:
+  BATCH_SIZE: 150 # Evaluating Batch size
+  SPLIT: val
+  # SPLIT: val-train
+
+TEST:
+  CHECKPOINTS:  /mnt/data8tb/Documents/models/repo/MotionGPT3/experiments/motgpt_2optimizer/Stage-1-diffusion-main-for-use/checkpoints/diffusion-min-FID-epoch=epoch=142.ckpt
+  # max-R3ep=0 / min-FIDep=0-v1/ last-v1
+  SPLIT: test
+  BATCH_SIZE: 300 # training Batch size
+  REPLICATION_TIMES: 2 # Number of times to replicate the test
+
+DATASET:
+  target: motGPT.data.HumanML3D.HumanML3DDataModule
+  CODE_PATH: TOKENS
+
+METRIC:
+  TYPE: ['TM2TMetrics', 'PredMetrics']
+
+LOSS:
+  LAMBDA_FEATURE: 1.0
+  LAMBDA_VELOCITY: 0.5
+  LAMBDA_COMMIT: 0.02
+  LAMBDA_CLS: 1.0
+  LAMBDA_DIFF: 0.5
+  ABLATION:
+    RECONS_LOSS: 'l1_smooth'
+
+model:
+  target: motGPT.models.motgpt.MotGPT
+  params:
+    condition: 'text'
+    task: 't2m'
+    lm: ${lm.mot_vae_gpt2}  # MLM: 238M
+    motion_vae: ${vae.mldvae}
+    mot_factor: 1.0
+    attention_mode: 'all'
+    guidance_scale: ${lm_ablation.model_guidance_scale}
+    with_vae_latent_norm: ${lm_ablation.with_vae_latent_norm}
+  diff_loss: ${lm.diffloss}
+
+LOGGER:
+  TYPE: ['wandb']
+  VAL_EVERY_STEPS: 1
+  WANDB:
+    params:
+      # offline: True
+      # tags: ['local']
+      tags: ['t2m']
+      project: motiongpt3

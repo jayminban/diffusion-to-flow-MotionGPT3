@@ -1,6 +1,6 @@
 # From Diffusion To Flow: Efficient Motion Generation In MotionGPT3
 
-This repository contains official code for the paper [From Diffusion To Flow: Efficient Motion Generation In MotionGPT3]() (ReALM-GEN Workshop ICLR 2026) by [Jaymin Ban](), [JiHong Jeon]() and [SangYeop Jeong]().
+This repository contains official code for the paper [From Diffusion To Flow: Efficient Motion Generation In MotionGPT3]() (ReALM-GEN Workshop ICLR 2026) by [Jaymin Ban](https://scholar.google.com/citations?user=ZjGC0RYAAAAJ&hl=en), [JiHong Jeon](https://scholar.google.com/citations?user=dCNBZzUAAAAJ&hl=en&oi=sra) and [SangYeop Jeong](https://scholar.google.com/citations?user=axhPQT8AAAAJ&hl=en&oi=ao).
 
 
 ## Summary
@@ -10,7 +10,7 @@ We found that by replacing MotionGPT3's diffusion head with a rectified flow app
 
 ## Architecture Diagram
 <p align="center">
-  <img src="assets/images/mgpt3-architecture.png" width="600">
+  <img src="assets/images/mgpt3-architecture.png" width="400">
 </p>
 
 ## Result Table 

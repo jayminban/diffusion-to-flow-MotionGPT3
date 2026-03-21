@@ -1,6 +1,6 @@
 # From Diffusion To Flow: Efficient Motion Generation In MotionGPT3
 
-This repository contains official code for the paper [From Diffusion To Flow: Efficient Motion Generation In MotionGPT3]() (ReALM-GEN Workshop ICLR 2026) by [Jaymin Ban](https://scholar.google.com/citations?user=ZjGC0RYAAAAJ&hl=en), [JiHong Jeon](https://scholar.google.com/citations?user=dCNBZzUAAAAJ&hl=en&oi=sra) and [SangYeop Jeong](https://scholar.google.com/citations?user=axhPQT8AAAAJ&hl=en&oi=ao).
+This repository contains official code for the paper [From Diffusion To Flow: Efficient Motion Generation In MotionGPT3](https://openreview.net/forum?id=EuuNOyt282) (ReALM-GEN Workshop ICLR 2026) by [Jaymin Ban](https://scholar.google.com/citations?user=ZjGC0RYAAAAJ&hl=en), [JiHong Jeon](https://scholar.google.com/citations?user=dCNBZzUAAAAJ&hl=en&oi=sra) and [SangYeop Jeong](https://scholar.google.com/citations?user=axhPQT8AAAAJ&hl=en&oi=ao).
 
 
 ## Summary

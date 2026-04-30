@@ -8,9 +8,9 @@ Recently, flow-based approaches have shown competitive results in generative mod
 
 We found that by replacing MotionGPT3's diffusion head with a rectified flow approach, we were able to further improve evaluation metrics while reducing both the required training epochs and the number of inference steps for motion generation.
 
-## Architecture Diagram
+## Poster (ICLR 2026 ReALM-GEN Workshop)
 <p align="center">
-  <img src="assets/images/mgpt3-architecture.png" width="400">
+  <img src="assets/images/ICLR-Re-ALM-GEN-poster.png" width="400">
 </p>
 
 ## Result Table 

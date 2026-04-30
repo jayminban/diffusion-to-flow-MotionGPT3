@@ -10,7 +10,7 @@ We found that by replacing MotionGPT3's diffusion head with a rectified flow app
 
 ## Poster (ICLR 2026 ReALM-GEN Workshop)
 <p align="center">
-  <img src="assets/images/ICLR-Re-ALM-GEN-poster.png" width="400">
+  <img src="assets/images/ICLR-Re-ALM-GEN-poster.png" width="600">
 </p>
 
 ## Result Table 
